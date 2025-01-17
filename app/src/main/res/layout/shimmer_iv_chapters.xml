@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvItemView"
+    android:elevation="2.60dp"
+    app:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="6.50dp"
+    android:background="@android:color/transparent"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6.50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/chapter_selector"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal"
+                android:weightSum="1"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.9"
+                    >
+
+                    <TextView
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvChapterNumber"
+                       android:background="@drawable/bg_shimmer"
+                        android:textStyle="bold"
+                        android:textColor="@color/gold"
+                        android:textSize="15.60sp"
+                        />
+
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvChaptersTitle"
+                        android:background="@drawable/bg_shimmer"
+                        android:textSize="19.50sp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="7.30dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
+                    >
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="420dp"
+                android:layout_height="91.00dp"
+                android:ellipsize="end"
+                android:maxLines="4"
+                android:layout_marginTop="6.50dp"
+                android:textSize="15.60sp"
+                android:id="@+id/tvChaptersDescription"
+                android:textColor="@color/chaptersDetails"
+                android:background="@drawable/bg_shimmer"
+
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="9.10dp"
+                >
+
+                <ImageView
+                    android:layout_width="36.40dp"
+                    android:layout_height="36.40dp"
+                    android:background="@drawable/bg_shimmer"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="25.00dp"
+                    android:layout_height="21.00dp"
+                    android:id="@+id/tvVersesCount"
+                    android:background="@drawable/bg_shimmer"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="13.00dp"
+                    />
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="21.00dp"
+                    android:id="@+id/tvVerses"
+                    android:background="@drawable/bg_shimmer"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="3.90dp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.10"
+            android:background="@drawable/bg_shimmer"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
