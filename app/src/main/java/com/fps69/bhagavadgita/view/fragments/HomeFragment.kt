@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentHomeBinding
 import com.fps69.bhagavadgita.modle.ChaptersItem
+import com.fps69.bhagavadgita.view.adapter.AdapterChapters
 import com.fps69.bhagavadgita.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -25,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 //    private lateinit var viewModel : MainViewModel >>> Upper wale ke place pe
     private val viewModel: MainViewModel by viewModels()
+    private lateinit var adapterChapters: AdapterChapters
 
 
     override fun onCreateView(
@@ -55,7 +57,10 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView(ChapterList: List<ChaptersItem>) {
 
-        
+        adapterChapters= AdapterChapters()
+        binding.rvChapters.adapter=adapterChapters
+        adapterChapters.differ.submitList(ChapterList)
+        binding.shimmer.visibility= View.GONE
 
     }
 

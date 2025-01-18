@@ -102,6 +102,7 @@
                     android:textColor="@color/gold"
                     android:textSize="15.70sp"
                     android:textStyle="bold"
+                    android:text="The first chapter of the Bhagavad Gita - Arjuna Vishada Yoga introduces the setup, the setting, the characters and the circumstances that led to the epic battle of Mahabharata, fought between the Pandavas and the Kauravas."
 
                     />
             </ScrollView>
@@ -114,9 +115,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:alpha="0.2"
+            android:background="@android:color/transparent"
             android:scaleType="centerCrop"
             android:src="@drawable/background"
-            android:background="@android:color/transparent"
 
             />
 
