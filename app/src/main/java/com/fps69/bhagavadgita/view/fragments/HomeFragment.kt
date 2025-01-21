@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.fps69.bhagavadgita.NetworkManger
 import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentHomeBinding
 import com.fps69.bhagavadgita.modle.ChaptersItem
@@ -40,9 +41,34 @@ class HomeFragment : Fragment() {
 
         changeStatuesBarColor()
 
-        getAllChapters()
+        checkNetworkConnection()
+
+
 
         return binding.root
+    }
+
+    private fun checkNetworkConnection() {
+        val networkManger = NetworkManger(requireContext())
+        networkManger.observe(viewLifecycleOwner){connection ->
+            if(connection == true){
+                getAllChapters()
+                binding.apply {
+                    shimmer.visibility= View.VISIBLE
+                    rvChapters.visibility= View.VISIBLE
+                    tvShowingMessage.visibility= View.GONE
+                }
+            }
+            else{
+                binding.apply {
+                    shimmer.visibility= View.GONE
+                    rvChapters.visibility= View.GONE
+                    tvShowingMessage.visibility= View.VISIBLE
+
+                }
+            }
+        }
+
     }
 
     private fun getAllChapters() {
