@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/versesFragment"
-        android:name="com.fps69.bhagavadgita.VersesFragment"
+        android:name="com.fps69.bhagavadgita.view.fragments.VersesFragment"
         android:label="fragment_verses"
         tools:layout="@layout/fragment_verses" />
 </navigation>

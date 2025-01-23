@@ -1,7 +1,6 @@
 package com.fps69.bhagavadgita.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,8 @@ import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.fps69.bhagavadgita.NetworkManger
 import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentHomeBinding
@@ -81,9 +79,14 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun onChapterIVClicked(chapterItem : ChaptersItem){
+        findNavController().navigate(R.id.action_homeFragment_to_versesFragment)
+
+    }
+
     private fun setupRecyclerView(ChapterList: List<ChaptersItem>) {
 
-        adapterChapters= AdapterChapters()
+        adapterChapters= AdapterChapters(::onChapterIVClicked)
         binding.rvChapters.adapter=adapterChapters
         adapterChapters.differ.submitList(ChapterList)
         binding.shimmer.visibility= View.GONE

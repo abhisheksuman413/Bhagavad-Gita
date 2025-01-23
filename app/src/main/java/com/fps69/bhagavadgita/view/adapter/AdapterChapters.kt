@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.fps69.bhagavadgita.databinding.ItemViewChaptersBinding
 import com.fps69.bhagavadgita.modle.ChaptersItem
 
-class AdapterChapters : RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>(){
+class AdapterChapters(val onChapterIVClicked: (ChaptersItem) -> Unit) : RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>(){
 
 
     val diffUtil = object:DiffUtil.ItemCallback<ChaptersItem>(){
@@ -45,7 +45,14 @@ class AdapterChapters : RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>
             tvChaptersTitle.text= chapter.name_translated
             tvChaptersDescription.text= chapter.chapter_summary
             tvVersesCount.text= chapter.verses_count.toString()
+
+            ll.setOnClickListener{
+                onChapterIVClicked(chapter)
+            }
         }
+
+
+
 
     }
 

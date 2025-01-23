@@ -2,6 +2,7 @@ package com.fps69.bhagavadgita.repository
 
 import com.fps69.bhagavadgita.datasource.Api.ApiUtilities
 import com.fps69.bhagavadgita.modle.ChaptersItem
+import com.fps69.bhagavadgita.modle.VersesItem
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -44,6 +45,29 @@ class AppRepository {
             awaitClose { }
         }
 
+    }
+
+
+    fun getVerses(chapterNumber : Int ): Flow<List<VersesItem>> = callbackFlow{
+        val callBack  = object : Callback<List<VersesItem>>{
+            override fun onResponse(call: Call<List<VersesItem>>, response: Response<List<VersesItem>>) {
+
+                if(response.isSuccessful && response.body() != null ){
+                    trySend(response.body()!!)
+                    close()
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<VersesItem>>, t: Throwable) {
+                close(t)
+            }
+
+        }
+
+
+        ApiUtilities.api.getVerses(chapterNumber).enqueue(callBack)
+        awaitClose{}
     }
 
 }
