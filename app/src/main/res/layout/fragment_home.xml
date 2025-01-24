@@ -60,7 +60,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_130sdp"
+        android:layout_height="@dimen/_140sdp"
         android:layout_marginHorizontal="@dimen/_3sdp"
         android:elevation="2.60dp"
         app:cardCornerRadius="13.00dp"
@@ -77,16 +77,16 @@
             android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/tvShowingVerses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2.60dp"
-                android:padding="3.90dp"
-                android:text="Verse Of the Day "
-                android:textColor="@color/gold"
-                android:textSize="18.30sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvShowingVerses"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="2.60dp"-->
+<!--                android:padding="3.90dp"-->
+<!--                android:text="Verse Of the Day "-->
+<!--                android:textColor="@color/gold"-->
+<!--                android:textSize="18.30sp"-->
+<!--                android:textStyle="bold" />-->
 
 
             <ScrollView
@@ -102,8 +102,7 @@
                     android:textColor="@color/gold"
                     android:textSize="15.70sp"
                     android:textStyle="bold"
-                    android:text="The first chapter of the Bhagavad Gita - Arjuna Vishada Yoga introduces the setup, the setting, the characters and the circumstances that led to the epic battle of Mahabharata, fought between the Pandavas and the Kauravas."
-
+                    android:text="कृष्णाय वासुदेवाय हरये परमात्मने ।\nप्रणतः क्लेशनाशाय गोविंदाय नमो नमः ।।\n\nयह श्लोक भगवान श्रीकृष्ण की महिमा का गान करता है और उनकी दिव्यता को व्यक्त करता है। श्रीकृष्ण केवल वासुदेव के पुत्र ही नहीं, बल्कि स्वयं परमात्मा, सृष्टि के नियंता, और भक्तों के सभी दुखों का नाश करने वाले हैं।\n\nकृष्णाय वासुदेवाय – इस पंक्ति में भगवान कृष्ण को संबोधित किया गया है, जो वासुदेव और देवकी के पुत्र हैं। उनका जन्म मथुरा में हुआ और वे गोकुल व वृंदावन में पले-बढ़े।\n\nहरये परमात्मने – हरि शब्द का अर्थ है 'जो सारे कष्टों को हर (नष्ट) कर देते हैं'। वे केवल एक व्यक्ति नहीं बल्कि स्वयं परमात्मा (Supreme Soul) हैं, जो सबके हृदय में निवास करते हैं।\n\nप्रणतः क्लेशनाशाय – जो भक्त उनकी शरण में आते हैं, वे उनके सारे कष्ट, दुख, पीड़ा और संकटों को समाप्त कर देते हैं। भगवान श्रीकृष्ण का स्वरूप ही दयालुता और करुणा से परिपूर्ण है।\n\nगोविंदाय नमो नमः – भगवान श्रीकृष्ण को  गोविंद कहा जाता है, जिसका अर्थ है गायों और समस्त प्राणियों के रक्षक। उन्होंने गोकुल में ग्वालों और गायों की रक्षा की, गोवर्धन पर्वत उठाकर अपने भक्तों की रक्षा की। इसी कारण उन्हें गोविंद कहा जाता है। इस श्लोक के माध्यम से हम उन्हें बार-बार नमन करते हैं।"
                     />
             </ScrollView>
 

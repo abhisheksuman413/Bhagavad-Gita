@@ -72,7 +72,7 @@
                 android:layout_margin="3.90dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="14.30sp"
-                android:textColor="@color/black"
+                android:textColor="@color/chaptersDetails"
                 android:text="sanjayaḥ uvācha—Sanjay said; dṛiṣhṭvā—on observing; tu—but; pāṇḍava-anīkam—the Pandava army; vyūḍham—standing in a military formation; duryodhanaḥ—King Duryodhan; tadā—then; āchāryam—teacher; upasaṅgamya—approached; rājā—the king; vachanam—words; abravīt—spoke"
                 android:maxLines="5"
                 />

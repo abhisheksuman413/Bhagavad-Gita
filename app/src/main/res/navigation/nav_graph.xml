@@ -27,5 +27,14 @@
         android:id="@+id/versesFragment"
         android:name="com.fps69.bhagavadgita.view.fragments.VersesFragment"
         android:label="fragment_verses"
-        tools:layout="@layout/fragment_verses" />
+        tools:layout="@layout/fragment_verses" >
+        <action
+            android:id="@+id/action_versesFragment_to_verseDetalisFragment"
+            app:destination="@id/verseDetalisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verseDetalisFragment"
+        android:name="com.fps69.bhagavadgita.view.fragments.VerseDetalisFragment"
+        android:label="fragment_verse_detalis"
+        tools:layout="@layout/fragment_verse_detalis" />
 </navigation>

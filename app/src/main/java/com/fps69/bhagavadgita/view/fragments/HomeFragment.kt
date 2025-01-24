@@ -80,7 +80,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun onChapterIVClicked(chapterItem : ChaptersItem){
-        findNavController().navigate(R.id.action_homeFragment_to_versesFragment)
+
+        val bundle = Bundle()
+
+        bundle.putInt("chapterNumber", chapterItem.chapter_number.toInt())
+        bundle.putString("chapterTitle", chapterItem.name_translated)
+        bundle.putString("chapterDec", chapterItem.chapter_summary)
+        bundle.putInt("verseCount", chapterItem.verses_count.toInt())
+
+        findNavController().navigate(R.id.action_homeFragment_to_versesFragment,bundle)
 
     }
 

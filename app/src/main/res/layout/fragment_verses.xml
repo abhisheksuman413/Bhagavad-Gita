@@ -82,8 +82,8 @@
             android:layout_marginTop="18.20dp"
             android:maxLines="3"
             android:text="The first chapter of the Bhagavad Gita - Arjuna Vishada Yoga introduces the setup, the setting, the characters and the circumstances that led to the epic battle of Mahabharata, fought between the Pandavas and the Kauravas"
-            android:textColor="@color/black"
-            android:textSize="15.60sp" />
+            android:textColor="@color/chaptersDetails"
+            android:textSize="12.30sp" />
 
         <TextView
             android:id="@+id/tvSeeMore"
@@ -125,19 +125,28 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvShowingMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="100.00dp"
-            android:gravity="center"
-            android:text="No internet connection ! \n Check for saved verses in settings "
-            android:textColor="@color/gold"
-            android:textSize="14.30sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvShowingMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:gravity="center"
+        android:text="No internet connection ! \n Check for saved verses in settings "
+        android:textColor="@color/gold"
+        android:textSize="14.30sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llTop"
+
+        />
 
 
     <LinearLayout
