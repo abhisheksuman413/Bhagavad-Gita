@@ -20,4 +20,12 @@ interface ApiInterface {
 
     @GET("/v2/chapters/{chapterNumber}/verses/")
     fun getVerses(@Path("chapterNumber") chapterNumber: Int): Call<List<VersesItem>>
+
+
+
+    @GET("/v2/chapters/{chapterNumber}/verses/{verseNumber}/")
+    fun getVerseDetails(
+        @Path("chapterNumber")chapterNumber: Int,
+        @Path("verseNumber")VerseNumber: Int
+    ) : Call<VersesItem>
 }

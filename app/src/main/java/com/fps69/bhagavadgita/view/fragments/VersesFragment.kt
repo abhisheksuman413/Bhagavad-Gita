@@ -17,6 +17,7 @@ import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentVersesBinding
 import com.fps69.bhagavadgita.view.adapter.AdapterVerses
 import com.fps69.bhagavadgita.viewmodel.MainViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -37,11 +38,13 @@ class VersesFragment : Fragment() {
 
         getAndSetChapterDetails()
 
-        onReadMoreClicked()
+
 
         changeStatuesBarColor()
 
         checkNetworkConnection()
+
+        onReadMoreClicked()
 
         return binding.root
     }
@@ -99,7 +102,7 @@ class VersesFragment : Fragment() {
     }
 
     private fun getVerses() {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO){
             mainViewmodel.getVerses(chapterNumber).collect { verseItemList ->
 
                 val verseList = arrayListOf<String>()
@@ -133,7 +136,8 @@ class VersesFragment : Fragment() {
 
         bundle.putInt("verseNumber", position)
         bundle.putString("verse", verse)
-        findNavController().navigate(R.id.action_versesFragment_to_verseDetalisFragment)
+        bundle.putInt("chapterNumber", chapterNumber)
+        findNavController().navigate(R.id.action_versesFragment_to_verseDetalisFragment, bundle)
 
     }
 

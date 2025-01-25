@@ -70,4 +70,28 @@ class AppRepository {
         awaitClose{}
     }
 
+
+
+    fun getVerseDetails(chapterNumber : Int, verseNumber : Int) : Flow<VersesItem> = callbackFlow {
+
+        val callBack = object : Callback<VersesItem>{
+            override fun onResponse(call: Call<VersesItem>, response: Response<VersesItem>) {
+                if(response.isSuccessful && response.body() != null){
+                    trySend(response.body()!!)
+                    close()
+                }
+            }
+
+            override fun onFailure(call: Call<VersesItem>, t: Throwable) {
+                close(t)
+            }
+
+        }
+
+
+        ApiUtilities.api.getVerseDetails(chapterNumber, verseNumber).enqueue(callBack)
+        awaitClose{}
+
+    }
+
 }
