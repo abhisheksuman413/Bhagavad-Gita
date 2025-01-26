@@ -26,10 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -67,9 +71,11 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llSaveFile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:visibility="gone"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -106,6 +112,59 @@
                     app:layout_anchor="@id/llBhagavadGita"
                     app:layout_anchorGravity="bottom"
                     app:trackColor="#fffdd0" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clInternetConnection"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.1"
+                        android:src="@drawable/no2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="1500dp"
+                        android:layout_height="150dp"
+
+                        android:layout_marginBottom="82dp"
+                        android:src="@drawable/no"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvShowingMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:layout_marginBottom="100dp"
+                        android:gravity="center"
+                        android:text="No internet connection ! \n Check for saved verses in settings "
+                        android:textColor="@color/gold"
+                        android:textSize="21.30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <TextView
                     android:id="@+id/tvVerseNumber"
@@ -179,7 +238,8 @@
                 app:layout_constraintBottom_toTopOf="@id/iv2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="visible"/>
 
             <ImageView
                 android:id="@+id/iv2"
@@ -191,7 +251,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/clBottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="visible"/>
 
 
 
@@ -214,6 +275,7 @@
                     android:layout_height="0dp"
 
 
+
                     android:alpha="0.1"
                     android:scaleType="centerCrop"
                     android:src="@drawable/cd11"
@@ -227,6 +289,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

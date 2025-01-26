@@ -102,7 +102,7 @@ class VersesFragment : Fragment() {
     }
 
     private fun getVerses() {
-        lifecycleScope.launch(Dispatchers.IO){
+        lifecycleScope.launch{
             mainViewmodel.getVerses(chapterNumber).collect { verseItemList ->
 
                 val verseList = arrayListOf<String>()

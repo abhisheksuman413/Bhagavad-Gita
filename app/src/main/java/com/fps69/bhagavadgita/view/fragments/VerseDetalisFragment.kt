@@ -85,9 +85,33 @@ class VerseDetalisFragment : Fragment() {
 
             if(connection == true ){
                 getVersesDetails()
+                binding.apply {
+                    tvVerseNumber.visibility=View.GONE
+                    tvVersesText.visibility=View.GONE
+                    tvTransliterationIfEnglish.visibility=View.GONE
+                    tvWordIfEnglish.visibility=View.GONE
+                    view.visibility=View.GONE
+                    iv1.visibility=View.GONE
+                    iv2.visibility=View.GONE
+                    llBottom.visibility=View.GONE
+                    progressBar.visibility=View.VISIBLE
+                    clInternetConnection.visibility=View.GONE
+                }
+
             }
             else{
-
+                binding.apply {
+                    tvVerseNumber.visibility=View.GONE
+                    tvVersesText.visibility=View.GONE
+                    tvTransliterationIfEnglish.visibility=View.GONE
+                    tvWordIfEnglish.visibility=View.GONE
+                    view.visibility=View.GONE
+                    iv1.visibility=View.GONE
+                    iv2.visibility=View.GONE
+                    llBottom.visibility=View.GONE
+                    progressBar.visibility=View.GONE
+                    clInternetConnection.visibility=View.VISIBLE
+                }
             }
         }
     }
@@ -96,7 +120,17 @@ class VerseDetalisFragment : Fragment() {
         lifecycleScope.launch {
             mainViewModel.getVerseDetails(chapterNumber, verseNumber).collect{verseItem ->
 
-                binding.progressBar.visibility=View.GONE
+                binding.apply {
+                    tvVerseNumber.visibility=View.VISIBLE
+                    tvVersesText.visibility=View.VISIBLE
+                    tvTransliterationIfEnglish.visibility=View.VISIBLE
+                    tvWordIfEnglish.visibility=View.VISIBLE
+                    view.visibility=View.VISIBLE
+                    iv1.visibility=View.VISIBLE
+                    iv2.visibility=View.VISIBLE
+                    llBottom.visibility=View.VISIBLE
+                    progressBar.visibility=View.GONE
+                }
                 setAllAtribute(verseItem)
 
             }
