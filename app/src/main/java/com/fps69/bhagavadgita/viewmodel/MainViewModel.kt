@@ -1,16 +1,20 @@
 package com.fps69.bhagavadgita.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import com.fps69.bhagavadgita.datasource.room.AppDatabase
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.modle.VersesItem
 import com.fps69.bhagavadgita.repository.AppRepository
 import kotlinx.coroutines.flow.Flow
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
+    val savedChaptersDao = AppDatabase.getDatabaseInstance(application)?.savedChapterDao()
 
-    val appRepository = AppRepository()
+    val appRepository = AppRepository(savedChaptersDao!!)
 
     fun getAllChapters() : Flow<List<ChaptersItem>>{
         return appRepository.getAllChapters()

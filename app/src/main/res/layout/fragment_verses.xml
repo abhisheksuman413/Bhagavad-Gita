@@ -32,7 +32,7 @@
             <ImageView
                 android:layout_width="21.00dp"
                 android:layout_height="21.00dp"
-                android:src="@drawable/swastika" />
+                android:src="@drawable/om" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
             <ImageView
                 android:layout_width="21.00dp"
                 android:layout_height="21.00dp"
-                android:src="@drawable/swastika" />
+                android:src="@drawable/om" />
 
 
         </LinearLayout>

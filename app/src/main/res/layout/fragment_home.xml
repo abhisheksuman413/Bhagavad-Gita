@@ -27,13 +27,14 @@
             android:gravity="center"
             android:padding="13.00dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="21.00dp"
                 android:layout_height="21.00dp"
-                android:src="@drawable/swastika" />
+                android:src="@drawable/om" />
 
             <TextView
                 android:id="@+id/tvChapterNumber"
@@ -42,16 +43,42 @@
                 android:layout_marginHorizontal="3dp"
                 android:text="Shree Bhagavad Gita"
                 android:textColor="@color/gold"
-                android:textSize="26.00sp"
+                android:textSize="19.00sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="21.00dp"
                 android:layout_height="21.00dp"
-                android:src="@drawable/swastika" />
+                android:src="@drawable/om" />
 
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llSaveFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.17"
+            app:layout_constraintStart_toEndOf="@id/llBhagavadGita"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/ivSave"
+                android:layout_width="39.00dp"
+                android:layout_height="30.00dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/save"
+                android:visibility="visible" />
+        </LinearLayout>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

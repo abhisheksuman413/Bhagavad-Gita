@@ -45,14 +45,15 @@
                         android:layout_height="65.10dp"
                         android:gravity="center"
                         android:padding="13.00dp"
+                        app:layout_constraintHorizontal_bias="0.2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_width="19.50dp"
-                            android:layout_height="19.50dp"
-                            android:src="@drawable/swastika" />
+                            android:layout_width="21.00dp"
+                            android:layout_height="21.00dp"
+                            android:src="@drawable/om" />
 
                         <TextView
                             android:id="@+id/tvHeading"
@@ -61,13 +62,13 @@
                             android:layout_marginHorizontal="2.60dp"
                             android:text="Shree Bhagavad Gita"
                             android:textColor="@color/gold"
-                            android:textSize="24.10sp"
+                            android:textSize="21.10sp"
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:layout_width="19.50dp"
-                            android:layout_height="19.50dp"
-                            android:src="@drawable/swastika" />
+                            android:layout_width="21.00dp"
+                            android:layout_height="21.00dp"
+                            android:src="@drawable/om" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -75,17 +76,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:visibility="gone"
-
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
+
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.11"
                         app:layout_constraintStart_toEndOf="@id/llBhagavadGita"
                         app:layout_constraintTop_toTopOf="parent">
 
 
                         <ImageView
                             android:id="@+id/ivFavoriteVerse"
-                            android:layout_width="39.00dp"
+                            android:layout_width="30.00dp"
                             android:layout_height="39.00dp"
                             android:layout_marginEnd="5dp"
                             android:src="@drawable/heart_com"
@@ -93,11 +95,11 @@
 
                         <ImageView
                             android:id="@+id/ivFavoriteVerseFilled"
-                            android:layout_width="39.00dp"
+                            android:layout_width="30.00dp"
                             android:layout_height="39.00dp"
                             android:layout_marginEnd="5dp"
                             android:src="@drawable/heart_com_fill"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

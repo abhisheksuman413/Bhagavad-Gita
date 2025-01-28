@@ -1,6 +1,8 @@
 package com.fps69.bhagavadgita.repository
 
 import com.fps69.bhagavadgita.datasource.Api.ApiUtilities
+import com.fps69.bhagavadgita.datasource.room.SavedChapterDao
+import com.fps69.bhagavadgita.datasource.room.SavedChapters
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.modle.VersesItem
 import kotlinx.coroutines.channels.awaitClose
@@ -10,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AppRepository {
+class AppRepository (val savedChaptersDao: SavedChapterDao){
 
 
 //    fun getAllChapters(): Flow<List<ChaptersItem>> = callbackFlow {
@@ -93,5 +95,8 @@ class AppRepository {
         awaitClose{}
 
     }
+
+
+    suspend fun insertChapter(chapter: SavedChapters) = savedChaptersDao.insertChapter(chapter)
 
 }

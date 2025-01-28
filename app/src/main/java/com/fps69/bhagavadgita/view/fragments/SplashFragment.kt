@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.fps69.bhagavadgita.R
 
 
-class splashFragment : Fragment() {
+class SplashFragment : Fragment() {
 
 
 
