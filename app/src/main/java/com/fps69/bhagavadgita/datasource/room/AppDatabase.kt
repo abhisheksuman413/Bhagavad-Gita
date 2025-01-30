@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 
 
 @Database(entities = [SavedChapters::class], version = 1, exportSchema = false)
-@TypeConverters(TypeConverters::class)
+@TypeConverters(myConverterssss::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun savedChapterDao(): SavedChapterDao
@@ -20,12 +20,12 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getDatabaseInstance(context: Context): AppDatabase? {
             val temINSTANCE = INSTANCE
-            if (INSTANCE != null) {
+            if (temINSTANCE != null) {
                 return temINSTANCE
             } else {
                 synchronized(this) {
                     val roomDb =
-                        Room.databaseBuilder(context, AppDatabase::class.java, "AppDatabase")
+                        Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "AppDatabase")
                             .build()
 
                     INSTANCE = roomDb

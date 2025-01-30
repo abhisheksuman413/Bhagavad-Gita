@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.fps69.bhagavadgita.datasource.room.AppDatabase
+import com.fps69.bhagavadgita.datasource.room.SavedChapters
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.modle.VersesItem
 import com.fps69.bhagavadgita.repository.AppRepository
@@ -26,5 +27,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun getVerseDetails(chapterNumber : Int, verseNumber : Int ) : Flow<VersesItem> =  appRepository.getVerseDetails(chapterNumber, verseNumber)
+
+
+
+
+    // Saved Chapters
+
+
+    suspend fun insertChapters(chapter: SavedChapters) = appRepository.insertChapter(chapter)
+
 
 }

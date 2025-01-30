@@ -11,9 +11,11 @@ import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.room.PrimaryKey
 import com.fps69.bhagavadgita.NetworkManger
 import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentHomeBinding
+import com.fps69.bhagavadgita.datasource.room.SavedChapters
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.view.adapter.AdapterChapters
 import com.fps69.bhagavadgita.viewmodel.MainViewModel
@@ -23,7 +25,8 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-//    private lateinit var viewModel : MainViewModel >>> Upper wale ke place pe
+
+    //    private lateinit var viewModel : MainViewModel >>> Upper wale ke place pe
     private val viewModel: MainViewModel by viewModels()
     private lateinit var adapterChapters: AdapterChapters
 
@@ -46,22 +49,67 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
+    private fun onFavoriteClicked(chapterItem: ChaptersItem) {
+
+
+        lifecycleScope.launch {
+            viewModel.getVerses(chapterItem.chapter_number).collect { verseItemList ->
+
+                val verseList = arrayListOf<String>()
+                for (currentVerse in verseItemList) {
+                    for (des in currentVerse.translations) {
+                        if (des.language == "english") {
+                            verseList.add(des.description)
+                            break
+                        }
+                    }
+                }
+
+                val savedChapters = SavedChapters(
+                    chapter_number=chapterItem.chapter_number,
+                    chapter_summary=chapterItem.chapter_summary,
+                    chapter_summary_hindi=chapterItem.chapter_summary_hindi,
+
+                    id=chapterItem.id,
+                    name= chapterItem.name,
+                    name_meaning=chapterItem.name_meaning,
+                    name_translated=chapterItem.name_translated,
+                    name_transliterated=chapterItem.name_transliterated,
+                    slug=chapterItem.slug,
+                    verses_count=chapterItem.verses_count,
+                    verses= verseList
+                )
+
+//                saveChaptersInRoomDB(savedChapters)
+                viewModel.insertChapters(savedChapters)
+            }
+        }
+
+    }
+
+//    private fun saveChaptersInRoomDB(savedChapters: SavedChapters){
+//        lifecycleScope.launch {
+//
+//        }
+//
+//    }
+
     private fun checkNetworkConnection() {
         val networkManger = NetworkManger(requireContext())
-        networkManger.observe(viewLifecycleOwner){connection ->
-            if(connection == true){
+        networkManger.observe(viewLifecycleOwner) { connection ->
+            if (connection == true) {
                 getAllChapters()
                 binding.apply {
-                    shimmer.visibility= View.VISIBLE
-                    rvChapters.visibility= View.VISIBLE
-                    tvShowingMessage.visibility= View.GONE
+                    shimmer.visibility = View.VISIBLE
+                    rvChapters.visibility = View.VISIBLE
+                    tvShowingMessage.visibility = View.GONE
                 }
-            }
-            else{
+            } else {
                 binding.apply {
-                    shimmer.visibility= View.GONE
-                    rvChapters.visibility= View.GONE
-                    tvShowingMessage.visibility= View.VISIBLE
+                    shimmer.visibility = View.GONE
+                    rvChapters.visibility = View.GONE
+                    tvShowingMessage.visibility = View.VISIBLE
 
                 }
             }
@@ -72,14 +120,14 @@ class HomeFragment : Fragment() {
     private fun getAllChapters() {
 
         lifecycleScope.launch {
-            viewModel.getAllChapters().collect{ChapterList->
+            viewModel.getAllChapters().collect { ChapterList ->
                 setupRecyclerView(ChapterList)
             }
         }
 
     }
 
-    private fun onChapterIVClicked(chapterItem : ChaptersItem){
+    private fun onChapterIVClicked(chapterItem: ChaptersItem) {
 
         val bundle = Bundle()
 
@@ -88,16 +136,16 @@ class HomeFragment : Fragment() {
         bundle.putString("chapterDec", chapterItem.chapter_summary)
         bundle.putInt("verseCount", chapterItem.verses_count.toInt())
 
-        findNavController().navigate(R.id.action_homeFragment_to_versesFragment,bundle)
+        findNavController().navigate(R.id.action_homeFragment_to_versesFragment, bundle)
 
     }
 
     private fun setupRecyclerView(ChapterList: List<ChaptersItem>) {
 
-        adapterChapters= AdapterChapters(::onChapterIVClicked)
-        binding.rvChapters.adapter=adapterChapters
+        adapterChapters = AdapterChapters(::onChapterIVClicked, ::onFavoriteClicked)
+        binding.rvChapters.adapter = adapterChapters
         adapterChapters.differ.submitList(ChapterList)
-        binding.shimmer.visibility= View.GONE
+        binding.shimmer.visibility = View.GONE
 
     }
 

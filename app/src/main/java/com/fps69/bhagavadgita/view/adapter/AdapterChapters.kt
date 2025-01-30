@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.fps69.bhagavadgita.databinding.ItemViewChaptersBinding
 import com.fps69.bhagavadgita.modle.ChaptersItem
 
-class AdapterChapters(val onChapterIVClicked: (ChaptersItem) -> Unit) : RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>(){
+class AdapterChapters(
+    val onChapterIVClicked: (ChaptersItem) -> Unit,
+    val onFavoriteClicked: (ChaptersItem) -> Unit
+) : RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>(){
 
 
     val diffUtil = object:DiffUtil.ItemCallback<ChaptersItem>(){
@@ -48,6 +51,10 @@ class AdapterChapters(val onChapterIVClicked: (ChaptersItem) -> Unit) : Recycler
 
             ll.setOnClickListener{
                 onChapterIVClicked(chapter)
+            }
+
+            ivFavorite.setOnClickListener{
+                onFavoriteClicked(chapter)
             }
         }
 

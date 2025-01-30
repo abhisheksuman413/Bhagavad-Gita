@@ -2,9 +2,10 @@ package com.fps69.bhagavadgita.datasource.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 
-
-@Entity(tableName = "SavedChapters")
+@Entity(tableName = "saved_chapters")
+@TypeConverters(myConverterssss::class) // Ensure type converters are applied
     data class SavedChapters (
         val chapter_number: Int,
         val chapter_summary: String,
