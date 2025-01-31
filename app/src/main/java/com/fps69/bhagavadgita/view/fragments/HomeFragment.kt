@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
@@ -43,6 +44,10 @@ class HomeFragment : Fragment() {
         changeStatuesBarColor()
 
         checkNetworkConnection()
+
+        binding.ivSave.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+        }
 
 
 
@@ -83,17 +88,11 @@ class HomeFragment : Fragment() {
 
 //                saveChaptersInRoomDB(savedChapters)
                 viewModel.insertChapters(savedChapters)
+                Toast.makeText(requireContext(),"${savedChapters.chapter_number} is Saved ",Toast.LENGTH_LONG).show()
             }
         }
 
     }
-
-//    private fun saveChaptersInRoomDB(savedChapters: SavedChapters){
-//        lifecycleScope.launch {
-//
-//        }
-//
-//    }
 
     private fun checkNetworkConnection() {
         val networkManger = NetworkManger(requireContext())

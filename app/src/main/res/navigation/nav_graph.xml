@@ -42,7 +42,7 @@
         tools:layout="@layout/fragment_verse_detalis" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.fps69.bhagavadgita.SettingFragment"
+        android:name="com.fps69.bhagavadgita.view.fragments.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" >
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/saveChapterFragment"
-        android:name="com.fps69.bhagavadgita.SaveChapterFragment"
+        android:name="com.fps69.bhagavadgita.view.fragments.SaveChapterFragment"
         android:label="fragment_save_chapter"
         tools:layout="@layout/fragment_save_chapter" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/savedVerseFragment"
-        android:name="com.fps69.bhagavadgita.SavedVerseFragment"
+        android:name="com.fps69.bhagavadgita.view.fragments.SavedVerseFragment"
         android:label="fragment_saved_verse"
         tools:layout="@layout/fragment_saved_verse" >
         <action

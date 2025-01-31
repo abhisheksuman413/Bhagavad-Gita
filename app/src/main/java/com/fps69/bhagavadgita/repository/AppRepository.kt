@@ -1,5 +1,6 @@
 package com.fps69.bhagavadgita.repository
 
+import androidx.lifecycle.LiveData
 import com.fps69.bhagavadgita.datasource.Api.ApiUtilities
 import com.fps69.bhagavadgita.datasource.room.SavedChapterDao
 import com.fps69.bhagavadgita.datasource.room.SavedChapters
@@ -98,5 +99,8 @@ class AppRepository (val savedChaptersDao: SavedChapterDao){
 
 
     suspend fun insertChapter(chapter: SavedChapters) = savedChaptersDao.insertChapter(chapter)
+
+
+    fun getSavedChapters() : LiveData<List<SavedChapters>> = savedChaptersDao.getSavedChapters()
 
 }

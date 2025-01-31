@@ -2,6 +2,7 @@ package com.fps69.bhagavadgita.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.fps69.bhagavadgita.datasource.room.AppDatabase
 import com.fps69.bhagavadgita.datasource.room.SavedChapters
@@ -35,6 +36,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     suspend fun insertChapters(chapter: SavedChapters) = appRepository.insertChapter(chapter)
+
+    fun getSavedChapters() : LiveData<List<SavedChapters>> = appRepository.getSavedChapters()
 
 
 }
