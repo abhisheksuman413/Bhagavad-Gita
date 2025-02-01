@@ -1,10 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.SavedVerseFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragments.SavedVerseFragment"
+
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/llBhagavadGita"
+            android:layout_width="wrap_content"
+            android:layout_height="65.00dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="13.00dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="21.00dp"
+                android:layout_height="21.00dp"
+                android:src="@drawable/om" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="3dp"
+                android:text="Shree Bhagavad Gita"
+                android:textColor="@color/gold"
+                android:textSize="26.00sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="21.00dp"
+                android:layout_height="21.00dp"
+                android:src="@drawable/om" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvChapters"
+        android:text="Verses "
+        android:textColor="@color/black"
+        android:textSize="23.40sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        />
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@id/shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6.70dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+            <include layout="@layout/shimmer_iv_verses" />
+
+
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVerses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6.70dp"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_view_verses"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvShowingMessage"
+        android:visibility="gone"
+        android:text="No chapters has saved ! \nNext time save some chapters when you are Online"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="14.30sp"
+        android:textColor="@color/gold"
+        android:layout_marginTop="260dp"
+        android:layout_marginHorizontal="2.60dp"
+        android:textStyle="bold"
+        />
+
+
+
+</LinearLayout>

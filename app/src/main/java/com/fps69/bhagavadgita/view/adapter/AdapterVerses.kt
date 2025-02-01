@@ -1,14 +1,16 @@
 package com.fps69.bhagavadgita.view.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.fps69.bhagavadgita.databinding.ItemViewVersesBinding
 
-class AdapterVerses( val onVersesItemClicked: (String, Int) -> Unit) : RecyclerView.Adapter<AdapterVerses.VersesViewHolder>() {
+class AdapterVerses(val onVersesItemClicked: (String, Int) -> Unit, val fromRoom: Boolean) : RecyclerView.Adapter<AdapterVerses.VersesViewHolder>() {
 
 
     val diffUtil = object : DiffUtil.ItemCallback<String>(){
@@ -47,8 +49,16 @@ class AdapterVerses( val onVersesItemClicked: (String, Int) -> Unit) : RecyclerV
             tvVersesNumber.text = "Verse ${position +1}"
             tvVerses.text = verses.toString()
 
-            ll.setOnClickListener {
-                onVersesItemClicked(verses, position+1)
+            if(fromRoom == false){
+                ll.setOnClickListener {
+                    onVersesItemClicked(verses, position+1)
+                }
+            }
+            else{
+                ivNext.visibility= View.GONE
+                ll.setOnClickListener {
+                    Toast.makeText(holder.itemView.context,"This verse is not Saved \nSave this verse And check in Saved Verses ", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

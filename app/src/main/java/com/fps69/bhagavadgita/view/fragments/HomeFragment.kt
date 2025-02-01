@@ -12,7 +12,6 @@ import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.room.PrimaryKey
 import com.fps69.bhagavadgita.NetworkManger
 import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentHomeBinding
@@ -88,10 +87,18 @@ class HomeFragment : Fragment() {
 
 //                saveChaptersInRoomDB(savedChapters)
                 viewModel.insertChapters(savedChapters)
-                Toast.makeText(requireContext(),"${savedChapters.chapter_number} is Saved ",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"Chapter ${savedChapters.chapter_number} is Saved ",Toast.LENGTH_LONG).show()
             }
         }
 
+    }
+
+
+    private fun onFavoriteFilledClicked(chapter:ChaptersItem){
+        lifecycleScope.launch {
+            viewModel.deleteChapter(chapter.id)
+            Toast.makeText(requireContext(), "Chapter ${chapter.chapter_number} is Deleted from Saved Chapter", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun checkNetworkConnection() {
@@ -134,6 +141,7 @@ class HomeFragment : Fragment() {
         bundle.putString("chapterTitle", chapterItem.name_translated)
         bundle.putString("chapterDec", chapterItem.chapter_summary)
         bundle.putInt("verseCount", chapterItem.verses_count.toInt())
+        bundle.putBoolean("showRoomData", false)
 
         findNavController().navigate(R.id.action_homeFragment_to_versesFragment, bundle)
 
@@ -141,7 +149,7 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView(ChapterList: List<ChaptersItem>) {
 
-        adapterChapters = AdapterChapters(::onChapterIVClicked, ::onFavoriteClicked)
+        adapterChapters = AdapterChapters(::onChapterIVClicked, ::onFavoriteClicked, true,::onFavoriteFilledClicked)
         binding.rvChapters.adapter = adapterChapters
         adapterChapters.differ.submitList(ChapterList)
         binding.shimmer.visibility = View.GONE

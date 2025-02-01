@@ -17,7 +17,6 @@ import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentVersesBinding
 import com.fps69.bhagavadgita.view.adapter.AdapterVerses
 import com.fps69.bhagavadgita.viewmodel.MainViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -36,17 +35,66 @@ class VersesFragment : Fragment() {
 
         binding = FragmentVersesBinding.inflate(layoutInflater)
 
-        getAndSetChapterDetails()
+
 
 
 
         changeStatuesBarColor()
 
-        checkNetworkConnection()
+        getData()
 
         onReadMoreClicked()
 
         return binding.root
+    }
+
+    private fun getData() {
+        val bundle = arguments
+        val showRoomData = bundle?.getBoolean("showRoomData")
+        chapterNumber= bundle?.getInt("chapterNumber")!!
+        val verseCount= bundle?.getInt("verseCount")
+        val chapterTitle= bundle?.getString("chapterTitle")
+        val chapterDec= bundle?.getString("chapterDec")
+
+
+        if(showRoomData==true){
+            getDataFromRoom(chapterNumber)
+        }
+
+        else{
+            getAndSetChapterDetails(chapterNumber,verseCount,chapterTitle,chapterDec)
+            checkNetworkConnection(chapterNumber)
+        }
+    }
+
+    private fun getAndSetChapterDetails(chapterNumber: Int, verseCount: Int?, chapterTitle: String?, chapterDec: String?) {
+
+        binding.apply {
+            tvChapterNumbers.text = "Chapter ${chapterNumber}"
+            tvNumberOfVerses.text= verseCount.toString()
+            tvChapterTitle.text = chapterTitle
+            tvChaptersDescription.text = chapterDec
+        }
+    }
+
+    private fun getDataFromRoom(chapterNumber: Int) {
+        mainViewmodel.getAParticularChapter(chapterNumber).observe(viewLifecycleOwner){savedChapters->
+
+            val chapterNumber_temp = savedChapters.chapter_number
+            val verseCount= savedChapters.verses_count
+            val chapterTitle= savedChapters.name_translated
+            val chapterDec= savedChapters.chapter_summary
+
+            getAndSetChapterDetails(chapterNumber_temp,verseCount,chapterTitle,chapterDec)
+
+            val verseList = savedChapters.verses
+
+            val fromRoom = true // Mark this value true because we are getting data from RoomDb(this for handel click on iteView of recyclerView)
+            setuprecyclerView(verseList,fromRoom)
+
+
+
+        }
     }
 
     private fun onReadMoreClicked() {
@@ -65,26 +113,12 @@ class VersesFragment : Fragment() {
         }
     }
 
-    private fun getAndSetChapterDetails() {
-
-        val bundle = arguments
-        chapterNumber = bundle?.getInt("chapterNumber")!!
-
-        binding.apply {
-            tvChapterNumbers.text = "Chapter ${bundle?.getInt("chapterNumber")}"
-            tvNumberOfVerses.text= bundle?.getInt("verseCount").toString()
-            tvChapterTitle.text = bundle?.getString("chapterTitle")
-            tvChaptersDescription.text = bundle?.getString("chapterDec")
-        }
-
-    }
-
-    private fun checkNetworkConnection() {
+    private fun checkNetworkConnection(chapterNumber: Int) {
 
         val networkManger = NetworkManger(requireContext())
         networkManger.observe(viewLifecycleOwner) { connection ->
             if (connection == true) {
-                getVerses()
+                getVerses(chapterNumber)
                 binding.apply {
                     shimmer.visibility = View.VISIBLE
                     rvVerses.visibility = View.VISIBLE
@@ -101,7 +135,7 @@ class VersesFragment : Fragment() {
         }
     }
 
-    private fun getVerses() {
+    private fun getVerses(chapterNumber: Int) {
         lifecycleScope.launch{
             mainViewmodel.getVerses(chapterNumber).collect { verseItemList ->
 
@@ -114,13 +148,14 @@ class VersesFragment : Fragment() {
                         }
                     }
                 }
-                setuprecyclerView(verseList)
+                val fromRoom = false // Mark this value false because we are getting data from API(this for handel click on iteView of recyclerView)
+                setuprecyclerView(verseList,fromRoom)
             }
         }
     }
 
-    private fun setuprecyclerView(  verseList: ArrayList<String>) {
-        adapterVerses = AdapterVerses(::onVersesItemClicked)
+    private fun setuprecyclerView(verseList: List<String>, fromRoom: Boolean) {
+        adapterVerses = AdapterVerses(::onVersesItemClicked,fromRoom)
         binding.rvVerses.adapter = adapterVerses
         adapterVerses.differ.submitList(verseList)
         binding.shimmer.visibility= View.GONE
@@ -134,8 +169,9 @@ class VersesFragment : Fragment() {
 
         val bundle = Bundle()
 
+        val comingFromRoom = false
+        bundle.putBoolean("comingFromRoom", comingFromRoom)
         bundle.putInt("verseNumber", position)
-        bundle.putString("verse", verse)
         bundle.putInt("chapterNumber", chapterNumber)
         findNavController().navigate(R.id.action_versesFragment_to_verseDetalisFragment, bundle)
 

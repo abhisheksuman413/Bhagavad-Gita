@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.fps69.bhagavadgita.R
+
 import com.fps69.bhagavadgita.databinding.FragmentSaveChapterBinding
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.view.adapter.AdapterChapters
 import com.fps69.bhagavadgita.viewmodel.MainViewModel
+import kotlinx.coroutines.launch
 
 class SaveChapterFragment : Fragment() {
 
-    private lateinit var binding : FragmentSaveChapterBinding
-    private val viewModel : MainViewModel by viewModels()
+    private lateinit var binding: FragmentSaveChapterBinding
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var adapterChapters: AdapterChapters
 
     override fun onCreateView(
@@ -34,10 +37,10 @@ class SaveChapterFragment : Fragment() {
     }
 
     private fun getSavedChapters() {
-        viewModel.getSavedChapters().observe(viewLifecycleOwner){listOfSavedChapters->
+        viewModel.getSavedChapters().observe(viewLifecycleOwner) { listOfSavedChapters ->
             val chapterList = arrayListOf<ChaptersItem>()
 
-            for(i in listOfSavedChapters){
+            for (i in listOfSavedChapters) {
                 val chapterItem = ChaptersItem(
                     i.chapter_number,
                     i.chapter_summary,
@@ -48,22 +51,22 @@ class SaveChapterFragment : Fragment() {
                     i.name_translated,
                     i.name_transliterated,
                     i.slug,
-                    i.verses_count)
+                    i.verses_count
+                )
 
                 chapterList.add(chapterItem)
             }
 
-            if(chapterList.isEmpty()){
+            if (chapterList.isEmpty()) {
                 binding.apply {
-                    shimmer.visibility=View.GONE
-                    rvChapters.visibility=View.GONE
-                    tvShowingMessage.visibility=View.VISIBLE
+                    shimmer.visibility = View.GONE
+                    rvChapters.visibility = View.GONE
+                    tvShowingMessage.visibility = View.VISIBLE
                 }
-            }
-            else{
+            } else {
                 binding.apply {
-                    tvShowingMessage.visibility=View.GONE
-                    shimmer.visibility=View.VISIBLE
+                    tvShowingMessage.visibility = View.GONE
+                    shimmer.visibility = View.VISIBLE
                     setupRecyclerView(chapterList)
 
                 }
@@ -72,17 +75,30 @@ class SaveChapterFragment : Fragment() {
     }
 
     private fun setupRecyclerView(chapterList: ArrayList<ChaptersItem>) {
-        adapterChapters = AdapterChapters(::onChapterIVClicked, ::onFavoriteClicked)
+        adapterChapters = AdapterChapters(
+            ::onChapterIVClicked,
+            ::onFavoriteClicked,
+            false,
+            ::onFavoriteFilledClicked
+        )
         binding.rvChapters.adapter = adapterChapters
         adapterChapters.differ.submitList(chapterList)
         binding.shimmer.visibility = View.GONE
+    }
+
+
+    fun onChapterIVClicked(chaptersItem: ChaptersItem) {
+        val bundle = Bundle()
+        bundle.putInt("chapterNumber", chaptersItem.chapter_number)
+        bundle.putBoolean("showRoomData", true)
+        findNavController().navigate(R.id.action_saveChapterFragment_to_versesFragment, bundle)
     }
 
     private fun onFavoriteClicked(chaptersItem: ChaptersItem) {
 
     }
 
-    fun onChapterIVClicked(chaptersItem: ChaptersItem) {
+    private fun onFavoriteFilledClicked(chapter:ChaptersItem){
 
     }
 

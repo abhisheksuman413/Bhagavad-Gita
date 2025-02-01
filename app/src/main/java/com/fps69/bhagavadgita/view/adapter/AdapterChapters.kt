@@ -1,6 +1,7 @@
 package com.fps69.bhagavadgita.view.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +12,9 @@ import com.fps69.bhagavadgita.modle.ChaptersItem
 
 class AdapterChapters(
     val onChapterIVClicked: (ChaptersItem) -> Unit,
-    val onFavoriteClicked: (ChaptersItem) -> Unit
+    val onFavoriteClicked: (ChaptersItem) -> Unit,
+    val show: Boolean,
+    val onFavoriteFilledClicked: (ChaptersItem) -> Unit
 ) : RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>(){
 
 
@@ -55,6 +58,19 @@ class AdapterChapters(
 
             ivFavorite.setOnClickListener{
                 onFavoriteClicked(chapter)
+            }
+
+            ivFavoriteFilled.setOnClickListener {
+                onFavoriteFilledClicked(chapter)
+            }
+
+            if(!show){
+                ivFavorite.visibility=View.GONE
+                ivFavoriteFilled.visibility=View.GONE
+            }
+            else{
+                ivFavorite.visibility=View.VISIBLE
+                ivFavoriteFilled.visibility=View.VISIBLE
             }
         }
 

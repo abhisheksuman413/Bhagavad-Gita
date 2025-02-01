@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import com.fps69.bhagavadgita.datasource.Api.ApiUtilities
 import com.fps69.bhagavadgita.datasource.room.SavedChapterDao
 import com.fps69.bhagavadgita.datasource.room.SavedChapters
+import com.fps69.bhagavadgita.datasource.room.SavedVerses
+import com.fps69.bhagavadgita.datasource.room.SavedVersesDao
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.modle.VersesItem
 import kotlinx.coroutines.channels.awaitClose
@@ -13,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AppRepository (val savedChaptersDao: SavedChapterDao){
+class AppRepository(val savedChaptersDao: SavedChapterDao, val savedVersesDao: SavedVersesDao){
 
 
 //    fun getAllChapters(): Flow<List<ChaptersItem>> = callbackFlow {
@@ -102,5 +104,23 @@ class AppRepository (val savedChaptersDao: SavedChapterDao){
 
 
     fun getSavedChapters() : LiveData<List<SavedChapters>> = savedChaptersDao.getSavedChapters()
+
+
+    fun getAParticularChapter(chapterNumber: Int): LiveData<SavedChapters> = savedChaptersDao.getAParticularChapter(chapterNumber)
+
+    suspend fun deleteChapter(id : Int)= savedChaptersDao.deleteChapter(id)
+
+
+
+
+
+    suspend fun insertEnglishVerse(verseInEnglish: SavedVerses) = savedVersesDao?.insertEnglishVerse(verseInEnglish)
+
+    fun getAllEnglishVerses():LiveData<List<SavedVerses>> = savedVersesDao.getAllEnglishVerses()
+
+    fun getParticularVerse(chapterNumber: Int, verseNumber:Int): LiveData<SavedVerses> = savedVersesDao.getParticularVerse(chapterNumber,verseNumber)
+
+    suspend fun deleteAParticularVerse(chapterNumber :Int , verseNumber:Int)= savedVersesDao.deleteAParticularVerse(chapterNumber,verseNumber)
+
 
 }
