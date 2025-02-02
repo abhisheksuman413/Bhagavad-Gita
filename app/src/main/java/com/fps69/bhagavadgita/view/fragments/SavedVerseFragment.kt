@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,6 +33,8 @@ class SavedVerseFragment : Fragment() {
 
         binding = FragmentSavedVerseBinding.inflate(layoutInflater)
 
+        changeStatuesBarColor()
+
         getSavedVersesFromRoom()
 
 
@@ -37,15 +42,43 @@ class SavedVerseFragment : Fragment() {
         return binding.root
     }
 
+    private fun changeStatuesBarColor() {
+
+        val window = activity?.window
+        window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+        if (window != null) {
+            WindowCompat.getInsetsController(window, window.decorView).apply {
+                isAppearanceLightStatusBars = true
+            }
+        }
+    }
+
     private fun getSavedVersesFromRoom() {
         viewModel.getAllEnglishVerses().observe(viewLifecycleOwner){savedVerseList->
 
-            setupRecyclerView(savedVerseList)
+            if(savedVerseList.isEmpty()){
+                binding.apply {
+                    shimmer.visibility = View.GONE
+                    rvVerses.visibility = View.GONE
+                    tvShowingMessage.visibility = View.VISIBLE
+                }
+            }
+            else{
+                binding.apply {
+                    tvShowingMessage.visibility = View.GONE
+                    shimmer.visibility = View.VISIBLE
+                    setupRecyclerView(savedVerseList)
+                }
+            }
+
+
         }
     }
 
     private fun setupRecyclerView(savedVerseList: List<SavedVerses>) {
 
+        binding.rvVerses.visibility=View.VISIBLE
         savedVersesAdapter =AdapterSavedVerses(::onItemViewClicked)
         binding.rvVerses.adapter= savedVersesAdapter
         savedVersesAdapter.differ.submitList(savedVerseList)

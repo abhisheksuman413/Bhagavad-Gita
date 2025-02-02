@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
     private fun onFavoriteClicked(chapterItem: ChaptersItem) {
 
 
+
         lifecycleScope.launch {
             viewModel.getVerses(chapterItem.chapter_number).collect { verseItemList ->
 
@@ -85,8 +86,9 @@ class HomeFragment : Fragment() {
                     verses= verseList
                 )
 
-//                saveChaptersInRoomDB(savedChapters)
-                viewModel.insertChapters(savedChapters)
+
+                viewModel.insertChapters(savedChapters) // Insert chapter in Room DB
+                viewModel.putSavedChapterInSharedPreference(savedChapters.chapter_number.toString(), savedChapters.id)  // Insert chapter in Shared Preference
                 Toast.makeText(requireContext(),"Chapter ${savedChapters.chapter_number} is Saved ",Toast.LENGTH_LONG).show()
             }
         }
@@ -96,7 +98,8 @@ class HomeFragment : Fragment() {
 
     private fun onFavoriteFilledClicked(chapter:ChaptersItem){
         lifecycleScope.launch {
-            viewModel.deleteChapter(chapter.id)
+            viewModel.deleteChapter(chapter.id)  // Delete chapter from Room DB
+            viewModel.deleteSavedChapterFromSharedPreference(chapter.id.toString()) // Delete chapter from Shared Preference
             Toast.makeText(requireContext(), "Chapter ${chapter.chapter_number} is Deleted from Saved Chapter", Toast.LENGTH_SHORT).show()
         }
     }
@@ -149,7 +152,7 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView(ChapterList: List<ChaptersItem>) {
 
-        adapterChapters = AdapterChapters(::onChapterIVClicked, ::onFavoriteClicked, true,::onFavoriteFilledClicked)
+        adapterChapters = AdapterChapters(::onChapterIVClicked, ::onFavoriteClicked, true,::onFavoriteFilledClicked, viewModel)
         binding.rvChapters.adapter = adapterChapters
         adapterChapters.differ.submitList(ChapterList)
         binding.shimmer.visibility = View.GONE

@@ -1,6 +1,5 @@
 package com.fps69.bhagavadgita.view.fragments
 
-import android.hardware.biometrics.PromptContentViewWithMoreOptionsButton
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +16,6 @@ import com.fps69.bhagavadgita.NetworkManger
 import com.fps69.bhagavadgita.R
 import com.fps69.bhagavadgita.databinding.FragmentVerseDetalisBinding
 import com.fps69.bhagavadgita.datasource.room.SavedVerses
-import com.fps69.bhagavadgita.modle.Commentary
-import com.fps69.bhagavadgita.modle.Translation
 import com.fps69.bhagavadgita.modle.VersesItem
 import com.fps69.bhagavadgita.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
@@ -54,14 +51,41 @@ class VerseDetalisFragment : Fragment() {
 
 
 
+
+
         return binding.root
+    }
+
+
+
+    // This function mange visibility of Favorite Button through Shared Preference
+    private fun manageVisibilityOfFavoriteButton(chapterNumber: Int, verseNumber: Int) {
+        val key = "${chapterNumber}.${verseNumber}"
+
+        val keys_In_SharedPreference = mainViewModel.getAllSaveVersesFromSharedPreference()
+
+        if(keys_In_SharedPreference.contains(key)){
+            binding.apply {
+                ivFavoriteVerse.visibility = View.GONE
+                ivFavoriteVerseFilled.visibility = View.VISIBLE
+            }
+        }
+        else{
+            binding.apply {
+                ivFavoriteVerse.visibility = View.VISIBLE
+                ivFavoriteVerseFilled.visibility = View.GONE
+            }
+        }
     }
 
     private fun getData() {
         val bundle = arguments
         val comingFromRoom = bundle?.getBoolean("comingFromRoom")
-        val chapterNumber = bundle?.getInt("chapterNumber")
-        val verseNumber = bundle?.getInt("verseNumber")
+        val chapterNumber = bundle?.getInt("chapterNumber")!!
+        val verseNumber = bundle?.getInt("verseNumber")!!
+
+        manageVisibilityOfFavoriteButton(chapterNumber,verseNumber)  //mange visibility of Favorite Button through Shared Preference
+
 
 
         if (comingFromRoom == true) {
@@ -71,13 +95,13 @@ class VerseDetalisFragment : Fragment() {
                 progressBar.visibility=View.VISIBLE
             }
             if (chapterNumber != null && verseNumber != null) {
-                getDataFromRoom(chapterNumber, verseNumber)
-
+                getDataFromRoom(chapterNumber, verseNumber) // get data from roomDB and proceed for further task
             }
 
         } else {
             if (chapterNumber != null && verseNumber != null) {
-                checkNetworkConnection(chapterNumber, verseNumber)
+                checkNetworkConnection(chapterNumber, verseNumber) // check network connection and proceed for further task
+
             }
         }
     }
@@ -119,7 +143,21 @@ class VerseDetalisFragment : Fragment() {
         )
         binding.ivFavoriteVerse.setOnClickListener {
             lifecycleScope.launch {
+
+                // Insert in RoomDB
                 mainViewModel.insertEnglishVerse(savedVerses)
+
+
+                // Insert in Shared Preference through key
+                val key = "${savedVerses.chapter_number}.${savedVerses.verse_number}"
+                mainViewModel.putSaveVersesInSharedPreference(key, savedVerses.id)
+
+
+                // Handel visibility of Favorite Button
+                 binding.apply {
+                     ivFavoriteVerse.visibility = View.GONE
+                     ivFavoriteVerseFilled.visibility = View.VISIBLE
+                 }
                 Toast.makeText(
                     requireContext(),
                     "${savedVerses.chapter_number}.${savedVerses.verse_number} verse is Saved ",
@@ -211,7 +249,20 @@ class VerseDetalisFragment : Fragment() {
 
         binding.ivFavoriteVerseFilled.setOnClickListener {
             lifecycleScope.launch {
+                // Delete from RoomDB
                 mainViewModel.deleteAParticularVerse(verseItem.chapter_number, verseItem.verse_number)
+
+                // Delete from Shared Preference through key
+                val key = "${verseItem.chapter_number}.${verseItem.verse_number}"
+                mainViewModel.deleteSaveVersesFromSharedPreference(key)
+
+
+                // Handel visibility of Favorite Button
+                binding.apply {
+                    ivFavoriteVerse.visibility = View.VISIBLE
+                    ivFavoriteVerseFilled.visibility = View.GONE
+                }
+
                 Toast.makeText(requireContext(),"${verseItem.chapter_number}.${verseItem.verse_number} verse is deleted form Saved Verses ",Toast.LENGTH_LONG).show()
             }
         }

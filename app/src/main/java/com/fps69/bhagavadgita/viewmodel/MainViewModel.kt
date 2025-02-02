@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.fps69.bhagavadgita.datasource.room.AppDatabase
 import com.fps69.bhagavadgita.datasource.room.SavedChapters
 import com.fps69.bhagavadgita.datasource.room.SavedVerses
+import com.fps69.bhagavadgita.datasource.sharedPreference.SharedPreferenceManager
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.modle.VersesItem
 import com.fps69.bhagavadgita.repository.AppRepository
@@ -17,7 +18,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val savedChaptersDao = AppDatabase.getDatabaseInstance(application)?.savedChapterDao()
     val savedVersesDao = AppDatabase.getDatabaseInstance(application)?.savedVersesDao()
 
-    val appRepository = AppRepository(savedChaptersDao!!, savedVersesDao!!)
+    val sharedPreferenceManager = SharedPreferenceManager(application)
+
+    val appRepository = AppRepository(savedChaptersDao!!, savedVersesDao!!,sharedPreferenceManager)
 
     fun getAllChapters() : Flow<List<ChaptersItem>>{
         return appRepository.getAllChapters()
@@ -53,5 +56,31 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getParticularVerse(chapterNumber: Int, verseNumber:Int): LiveData<SavedVerses> = appRepository.getParticularVerse(chapterNumber,verseNumber)
 
     suspend fun deleteAParticularVerse(chapterNumber :Int , verseNumber:Int) = appRepository.deleteAParticularVerse(chapterNumber,verseNumber)
+
+
+
+
+
+    // Manage Chapters in Shared Preference
+
+    fun getAllSavedChaptersFromSharedPreference() : Set<String> = appRepository.getAllSavedChaptersFromSharedPreference()
+
+
+    fun putSavedChapterInSharedPreference(key: String, value: Int)= appRepository.putSavedChapterInSharedPreference(key, value)
+
+
+    fun deleteSavedChapterFromSharedPreference(key:String )=appRepository.deleteSavedChapterFromSharedPreference(key)
+
+
+
+
+    // Manage Verses in Shared Preference
+
+    fun getAllSaveVersesFromSharedPreference() : Set<String> = appRepository.getAllSaveVersesFromSharedPreference()
+
+    fun putSaveVersesInSharedPreference(key: String, value: Int)= appRepository.putSaveVersesInSharedPreference(key,value)
+
+    fun deleteSaveVersesFromSharedPreference(key:String )=appRepository.deleteSaveVersesFromSharedPreference(key)
+
 
 }

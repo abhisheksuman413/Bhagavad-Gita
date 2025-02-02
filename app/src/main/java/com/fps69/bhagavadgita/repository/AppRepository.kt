@@ -6,6 +6,7 @@ import com.fps69.bhagavadgita.datasource.room.SavedChapterDao
 import com.fps69.bhagavadgita.datasource.room.SavedChapters
 import com.fps69.bhagavadgita.datasource.room.SavedVerses
 import com.fps69.bhagavadgita.datasource.room.SavedVersesDao
+import com.fps69.bhagavadgita.datasource.sharedPreference.SharedPreferenceManager
 import com.fps69.bhagavadgita.modle.ChaptersItem
 import com.fps69.bhagavadgita.modle.VersesItem
 import kotlinx.coroutines.channels.awaitClose
@@ -15,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AppRepository(val savedChaptersDao: SavedChapterDao, val savedVersesDao: SavedVersesDao){
+class AppRepository(val savedChaptersDao: SavedChapterDao, val savedVersesDao: SavedVersesDao, val sharedPreferencesManager: SharedPreferenceManager){
 
 
 //    fun getAllChapters(): Flow<List<ChaptersItem>> = callbackFlow {
@@ -123,4 +124,25 @@ class AppRepository(val savedChaptersDao: SavedChapterDao, val savedVersesDao: S
     suspend fun deleteAParticularVerse(chapterNumber :Int , verseNumber:Int)= savedVersesDao.deleteAParticularVerse(chapterNumber,verseNumber)
 
 
+
+
+    // Manage Chapters in Shared Preference
+
+    fun getAllSavedChaptersFromSharedPreference() : Set<String> = sharedPreferencesManager.getAllSavedChaptersFromSharedPreference()
+
+
+    fun putSavedChapterInSharedPreference(key: String, value: Int)= sharedPreferencesManager.putSavedChapterInSharedPreference(key, value)
+
+
+    fun deleteSavedChapterFromSharedPreference(key:String )=sharedPreferencesManager.deleteSavedChapterFromSharedPreference(key)
+
+
+
+    // Manage Verses in Shared Preference
+
+    fun getAllSaveVersesFromSharedPreference() : Set<String> = sharedPreferencesManager.getAllSaveVersesFromSharedPreference()
+
+    fun putSaveVersesInSharedPreference(key: String, value: Int)= sharedPreferencesManager.putSaveVersesInSharedPreference(key,value)
+
+    fun deleteSaveVersesFromSharedPreference(key:String )=sharedPreferencesManager.deleteSaveVersesFromSharedPreference(key)
 }
