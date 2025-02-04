@@ -34,7 +34,30 @@ This app is not just a reading tool; it's a **spiritual companion** designed to 
 - **Animations for better user experience:** Smooth fragment transitions and UI animations enhance the usability of the app, providing an engaging and modern user experience.
 
 ## Screenshots
-**𝐂𝐨𝐦𝐢𝐧𝐠 𝐒𝐨𝐨𝐧**
+
+### Dark Mode
+
+<p align="center">
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc1.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc2.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc3.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc4.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc5.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc6.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc7.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc8.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc9.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc10.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc11.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc12.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc13.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc14.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc15.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc16.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc17.jpg" alt="Light Mode Screenshot 1" width="150" />
+  <img src="https://github.com/abhisheksuman413/Bhagavad-Gita/blob/master/Screenshots/pc18.jpg" alt="Light Mode Screenshot 1" width="150" />
+  
+</p>
 
 ## Technologies Used
 
