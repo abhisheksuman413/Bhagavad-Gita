@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvChapters"
-        android:text="Chapters "
+        android:text="Saved Chapters "
         android:textColor="@color/black"
         android:textSize="23.40sp"
         android:textStyle="bold"

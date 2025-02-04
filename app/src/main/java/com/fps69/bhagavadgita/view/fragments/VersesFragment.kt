@@ -123,12 +123,14 @@ class VersesFragment : Fragment() {
                     shimmer.visibility = View.VISIBLE
                     rvVerses.visibility = View.VISIBLE
                     tvShowingMessage.visibility = View.GONE
+                    imageView4.visibility=View.GONE
                 }
             } else {
                 binding.apply {
                     shimmer.visibility = View.GONE
                     rvVerses.visibility = View.GONE
                     tvShowingMessage.visibility = View.VISIBLE
+                    imageView4.visibility=View.VISIBLE
                 }
             }
 
@@ -180,7 +182,7 @@ class VersesFragment : Fragment() {
     private fun changeStatuesBarColor() {
         val window = activity?.window
         window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+        window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.splash2)
         if (window != null) {
             WindowCompat.getInsetsController(window, window.decorView).apply {
                 isAppearanceLightStatusBars = true

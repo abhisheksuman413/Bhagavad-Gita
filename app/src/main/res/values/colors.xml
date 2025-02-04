@@ -6,7 +6,10 @@
 
     <color name="gold">#DFBD69</color>
 
+
     <color name="chaptersDetails">#696969</color>
 
     <color name="splash">#7d4f44</color>
+
+    <color name="splash2">#FAEAB8</color>
 </resources>

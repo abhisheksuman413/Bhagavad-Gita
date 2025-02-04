@@ -363,7 +363,7 @@ class VerseDetalisFragment : Fragment() {
     private fun changeStatuesBarColor() {
         val window = activity?.window
         window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+        window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.splash2)
         if (window != null) {
             WindowCompat.getInsetsController(window, window.decorView).apply {
                 isAppearanceLightStatusBars = true

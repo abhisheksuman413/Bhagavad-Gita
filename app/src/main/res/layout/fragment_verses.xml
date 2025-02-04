@@ -128,32 +128,12 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvShowingMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-
-        android:gravity="center"
-        android:text="No internet connection ! \n Check for saved verses in settings "
-        android:textColor="@color/gold"
-        android:textSize="14.30sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llTop"
-
-        />
-
-
     <LinearLayout
         android:id="@+id/llBottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -202,7 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6.70dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_view_verses"/>
 
@@ -245,6 +225,41 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="1500dp"
+        android:layout_height="150dp"
+
+        android:src="@drawable/no"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTop"
+        app:layout_constraintVertical_bias="0.37" />
+
+
+    <TextView
+        android:id="@+id/tvShowingMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:gravity="center"
+        android:text="No internet connection ! \n Check for saved verses in settings "
+        android:textColor="@color/gold"
+        android:textSize="14.30sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.13" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
