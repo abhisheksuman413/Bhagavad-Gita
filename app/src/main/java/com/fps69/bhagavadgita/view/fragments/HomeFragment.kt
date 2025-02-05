@@ -44,6 +44,8 @@ class HomeFragment : Fragment() {
 
         checkNetworkConnection()
 
+        DoNothing()
+
         binding.ivSave.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
         }
@@ -51,6 +53,10 @@ class HomeFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun DoNothing() {
+        
     }
 
 
